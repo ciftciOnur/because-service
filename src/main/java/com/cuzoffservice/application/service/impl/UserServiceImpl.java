@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService {
 	}
 	@Transactional
 	@Override
-	public String updatePseudoId(String userId, String password) {
-		User user = userRepository.findByUserId(userId);
+	public String updatePseudoId(String email) {
+		User user = userRepository.findByEmail(email);
 		UUID pseudoId = UUID.randomUUID();
 		LocalDate today = LocalDate.now();
 		LocalDate tomorrow = today.plusDays(1);

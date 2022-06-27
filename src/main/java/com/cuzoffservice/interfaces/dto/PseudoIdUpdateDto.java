@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class PseudoIdUpdateDto {
 	
-	private String userId;
-	private String password;
+	private String email;
 
 }

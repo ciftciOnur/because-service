@@ -11,7 +11,7 @@ public interface UserService {
 	@Transactional
 	CreateUserResponseDto createUser(CreateUserRequestDto request);
 
-	String updatePseudoId(String userId, String password);
+	String updatePseudoId(String email);
 
 	User findPseudoId(String pseudoId);
 

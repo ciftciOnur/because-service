@@ -21,7 +21,7 @@ public class UserController {
     @RequestMapping(value = "/update-pseudoid", method = RequestMethod.PUT)
     ResponseEntity<String> updatePseudoId(@RequestBody PseudoIdUpdateDto pseudoIdUpdateDTO) {
         return new ResponseEntity<String>(userService
-        		.updatePseudoId(pseudoIdUpdateDTO.getUserId(), pseudoIdUpdateDTO.getPassword()), HttpStatus.OK);
+        		.updatePseudoId(pseudoIdUpdateDTO.getEmail()), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/change-password", method = RequestMethod.PUT)
