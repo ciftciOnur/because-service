@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: cuz-off-service
+  datasource:
+    url: jdbc:mysql://192.168.15.230:3306/CUZ_OFF?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=false&allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+jwt:
+  secret: 9d9q0wud9qudw98qwud98u
+
