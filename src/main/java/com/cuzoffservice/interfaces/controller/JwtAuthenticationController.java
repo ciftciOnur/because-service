@@ -2,7 +2,9 @@ package com.cuzoffservice.interfaces.controller;
 
 import com.cuzoffservice.application.service.UserService;
 import com.cuzoffservice.application.service.impl.JwtUserDetailsService;
+import com.cuzoffservice.infrastructure.config.EmailNotFoundException;
 import com.cuzoffservice.infrastructure.config.JwtTokenUtil;
+import com.cuzoffservice.infrastructure.config.PasswordNotCorrectException;
 import com.cuzoffservice.interfaces.dto.CreateUserRequestDto;
 import com.cuzoffservice.interfaces.dto.CreateUserResponseDto;
 import com.cuzoffservice.interfaces.dto.LoginRequestDto;
@@ -37,16 +39,13 @@ public class JwtAuthenticationController {
     private JwtUserDetailsService userDetailsService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginRequestDto authenticationRequest) throws Exception {
-
         authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getEmail());
-
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new LoginResponseDto(token));
@@ -54,7 +53,6 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody CreateUserRequestDto registerRequest) throws Exception {
-
         CreateUserResponseDto createUserResponseDTO = userService.createUser(registerRequest);
         return new ResponseEntity<CreateUserResponseDto>(createUserResponseDTO, HttpStatus.CREATED);
     }
@@ -63,9 +61,9 @@ public class JwtAuthenticationController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new EmailNotFoundException("USER_DISABLED");
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new PasswordNotCorrectException("INVALID_CREDENTIALS");
         }
     }
 }
