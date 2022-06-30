@@ -4,9 +4,9 @@ spring:
   application:
     name: cuz-off-service
   datasource:
-    url: jdbc:mysql://192.168.15.230:3306/CUZ_OFF?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=false&allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
-    username: root
-    password: 123456
+    url: jdbc:mysql://cuz-off-database.cv37zh5pwdqv.eu-central-1.rds.amazonaws.com/CUZ_OFF?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=false&allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true
+    username: admin
+    password: cuzOffPass
   jpa:
     show-sql: true
     hibernate:
